@@ -17,7 +17,7 @@
 <div class="card mt-4">
 	<div class="card-body">
 
-        <h5 class="card-title fw-bolder mb-3">Ubah Data pegawai</h5>
+        <h5 class="card-title fw-bolder mb-3">Ubah Data pegawai {{ $data->id_pegawai }}</h5>
 
 		<form method="post" action="{{ route('pegawai.update', $data->id_pegawai) }}">
 			@csrf

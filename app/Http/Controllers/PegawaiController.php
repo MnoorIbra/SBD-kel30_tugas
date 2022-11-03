@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,9 @@ class PegawaiController extends Controller
     }
 
     public function create() {
-        return view('pegawai.add');
+
+        $departements = Departement::all();
+        return view('pegawai.add', compact('departements'));
     }
 
     public function store(Request $request) {
@@ -34,7 +37,7 @@ class PegawaiController extends Controller
         DB::insert('INSERT INTO pegawai(id_pegawai, nama_pegawai, alamat, no_telfon, jenis_kelamin, id_departement) VALUES (:id_pegawai, :nama_pegawai, :alamat, :no_telfon, :jenis_kelamin, :id_departement)',
         [
             'id_pegawai' => $request->id_pegawai,
-            'nama_pegawai' => $request->nama_pegawai,
+            'nama_pegawai' => $request->nama_pegawai, // dia manggil tabel pegawai kolom nama pegawai
             'alamat' => $request->alamat,
             'no_telfon' => $request->no_telfon,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -102,8 +105,18 @@ class PegawaiController extends Controller
         // Menggunakan laravel eloquent
         // pegawai::where('id_pegawai', $id)->delete();
 
-        return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil dihapus');
+        return redirect()->route('pegawai.index')->with('success', 'Data  berhasil dihapus');
     }
 
+    public function caripegawai(Request $request) {
+        $cari = $request->caripegawai;
+
+        $datas = DB::table('pegawai')->where('nama_pegawai', 'like', "%".$cari."%");
+
+        return view('pegawai.index')
+            ->with('datas', $datas);
+
+
+    }
 
 }
