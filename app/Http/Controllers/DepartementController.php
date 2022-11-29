@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departement;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -11,9 +12,11 @@ class DepartementController extends Controller
 {
     public function index() {
         $datas = DB::select('select * from departement');
+        $Pegawais = Pegawai::all();
 
         return view('departement.index')
-            ->with('datas', $datas);
+            ->with('datas', $datas )
+            ->with('pegawais', $Pegawais);
     }
 
     public function create() {
@@ -32,7 +35,7 @@ class DepartementController extends Controller
         [
             'id_departement' => $request->id_departement,
             'nama_departement' => $request->nama_departement,
-       
+
         ]
         );
 

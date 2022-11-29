@@ -59,8 +59,8 @@ class PegawaiController extends Controller
 
     public function edit($id) {
         $data = DB::table('pegawai')->where('id_pegawai', $id)->first();
-
-        return view('pegawai.edit')->with('data', $data);
+        $departements = Departement::all();
+        return view('pegawai.edit')->with('data', $data, compact('departements'));
     }
 
     public function update($id, Request $request) {

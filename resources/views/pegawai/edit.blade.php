@@ -45,7 +45,8 @@
 
             <div class="mb-3">
                 <label for="id_departement" class="form-label">ID Departement</label>
-                <input type="text" class="form-control" id="id_departement" name="id_departement" value="{{ $data->id_departement }}">
+                <input type="text" class="form-control" id="harga" name="id_departement">
+
             </div>
 
 			<div class="text-center">
